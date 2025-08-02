@@ -1,13 +1,9 @@
 from fastapi import APIRouter, HTTPException
-from pydantic import BaseModel
 from typing import List
-from models import UserPreferences, OutfitSuggestion
+from models import UserPreferences, OutfitSuggestion, OutfitRequest
 from controllers.outfit_suggestion_controller import OutfitSuggestionController
 
 router = APIRouter()
-
-class OutfitRequest(BaseModel):
-    preferences: UserPreferences
 
 @router.post("/suggest", response_model=List[OutfitSuggestion])
 async def suggest_outfits(request: OutfitRequest):

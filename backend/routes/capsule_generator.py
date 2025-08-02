@@ -1,14 +1,9 @@
 from fastapi import APIRouter, HTTPException
-from pydantic import BaseModel
-from typing import List, Dict
-from models import CapsuleTheme, WardrobeItem, CapsuleOutfit
+from typing import List
+from models import CapsuleTheme, WardrobeItem, CapsuleOutfit, CapsuleRequest
 from controllers.capsule_generator_controller import CapsuleGeneratorController
 
 router = APIRouter()
-
-class CapsuleRequest(BaseModel):
-    theme: str
-    user_preferences: Dict  # Additional user preferences
 
 @router.get("/themes", response_model=List[CapsuleTheme])
 async def get_themes():

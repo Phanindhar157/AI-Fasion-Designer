@@ -1,5 +1,4 @@
 from fastapi import APIRouter, HTTPException, UploadFile, File
-from pydantic import BaseModel
 from typing import List
 from models import GarmentGenerationRequest, GarmentDesign
 from controllers.garment_generator_controller import GarmentGeneratorController
@@ -22,7 +21,7 @@ async def generate_from_sketch(file: UploadFile = File(...)):
         # and generate a garment design based on it
         return {
             "message": "Sketch received successfully",
-            "design_id": "sketch_" + str(hash(file.filename)) % 10000
+            "design_id": "sketch_" + str(abs(hash(file.filename or "default")) % 10000)
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error processing sketch: {str(e)}")

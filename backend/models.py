@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import List, Optional
+from typing import List, Optional, Dict, Any
 
 class UserPreferences(BaseModel):
     gender: str
@@ -51,3 +51,10 @@ class CapsuleOutfit(BaseModel):
     name: str
     items: List[int]  # List of item IDs
     description: str
+
+class CapsuleRequest(BaseModel):
+    theme: str
+    user_preferences: Dict[str, Any] = {}  # Additional user preferences
+
+class OutfitRequest(BaseModel):
+    preferences: UserPreferences
